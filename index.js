@@ -2,14 +2,15 @@ const express = require("express");
 const { BetaAnalyticsDataClient } = require("@google-analytics/data");
 const path = require("path");
 require("dotenv").config();
-const { getDateRange } = require("./utils/dateUtils"); // Importación
+const { getDateRange } = require("./utils/dateUtils");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const credentials = JSON.parse(process.env.GOOGLE_CLOUD_CREDENTIALS);
 
 // Inicializa el cliente de Analytics con la ruta al archivo JSON
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  keyFilename: path.join(__dirname, "credentials.json"), // Cambia por el nombre real de tu archivo
+  keyFilename: path.join(__dirname, credentials || "credentials.json"),
 });
 
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID; // Reemplaza con el ID real
