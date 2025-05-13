@@ -8,9 +8,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const credentials = JSON.parse(process.env.GOOGLE_CLOUD_CREDENTIALS);
 
-// Inicializa el cliente de Analytics con la ruta al archivo JSON
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  keyFilename: path.join(__dirname, credentials || "credentials.json"),
+  credentials,
 });
 
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID; // Reemplaza con el ID real
